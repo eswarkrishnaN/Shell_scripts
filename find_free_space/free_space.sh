@@ -12,6 +12,16 @@ echo "$free_space_avalible"
 
 
 
-if [ "$free_space_avalibleif" -lt  1 ]; then
+if (( $(echo "$free_space_avaliable < 1" | bc -l) )); then
    echo "Your storage is running low: $free_space_avaliable" | mail -s "Low Disk Space Alert" "your_email_address@example.com"
 fi
+
+for server_list in "$list_of_servers"
+do 
+output=$(ssh $lis_of_server  free -h | grep -E "Mem" | awk '{print $2}')
+
+echo "server id is $list_of_server \n and free space is $output"
+if [$output -lt 1.0] ; then
+   echo "Your storage is running low: $free_space_avaliable" | mail -s "Low Disk Space Alert" "your_email_address@example.com"
+fi
+donec
