@@ -24,4 +24,8 @@ echo "server id is $list_of_server \n and free space is $output"
 if [[$output -lt 1.0]]; then
    echo "Your storage is running low: $free_space_avaliable" | mail -s "Low Disk Space Alert" "your_email_address@example.com"
 fi
+<<<<<<< HEAD
 donec
+=======
+done
+>>>>>>> f524ec5 (adding checking services persent are not)
