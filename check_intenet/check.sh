@@ -5,19 +5,19 @@ printf '%*s\n' "${cols}" ' ' | tr ' ' '='
 echo "enter a webiste name like https://www.google.com"
 printf '%*s\n' "${cols}" ' ' | tr ' ' '='
 
-read -p " enter a website name " my_var
+read -p " enter a website name git " my_var
 
 
 
-icheck=$(curl -Is $my_var | head -n 1  1>/dev/null 2>/dev/null)
+icheck=$(curl -Is $my_var | head -n 1 | awk '{print $2}')
 
-if [ $? -ne  0  ]
+if [ $? ==  0  ]
 then
    echo "no error"
-   if [ icheck -eq 200]
+   if [ icheck == 200 ]
    then 
      echo "your are acess to the network"
-   elif [ icheck -eq 301]
+   elif [ icheck == 301 ]
    then
      echo "your are not enterd to this network"
    else
