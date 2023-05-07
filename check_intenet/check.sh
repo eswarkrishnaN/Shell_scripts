@@ -1,28 +1,25 @@
-#!/bin/bash
-
 cols=$(tput cols)
 printf '%*s\n' "${cols}" ' ' | tr ' ' '='
-echo "enter a webiste name like https://www.google.com"
+echo "enter a website name like https://www.google.com"
 printf '%*s\n' "${cols}" ' ' | tr ' ' '='
 
-read -p " enter a website name git " my_var
+read -p "enter a website name: " my_var
 
+curl -Is $my_var > /dev/null 2>&1
+curl_exit_status=$?
 
-
-icheck=$(curl -Is $my_var | head -n 1 | awk '{print $2}')
-
-if [ $? ==  0  ]
+if [ $curl_exit_status == 0 ]
 then
-   echo "no error"
-   if [ icheck == 200 ]
+   icheck=$(curl -Is $my_var | head -n 1 | awk '{print $2}')
+   if [ $icheck == 200 ]
    then 
-     echo "your are acess to the network"
-   elif [ icheck == 301 ]
+     echo "you are accessing the network"
+   elif [ $icheck == 301 ]
    then
-     echo "your are not enterd to this network"
+     echo "you are not authorized to access this network"
    else
-      echo "this is your status $icheck"
+      echo "some times went wrong may network not connected are you entered in valid url"
    fi
-  else 
+else 
     echo "network is not connected"
 fi
